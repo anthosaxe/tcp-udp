@@ -1,6 +1,6 @@
 # 🌐 Protocoles TCP et UDP - Site de Présentation
 
-[Le site](https://github.com/anthosaxe/tcp-udp-presentation.git)
+[Le site](https://anthosaxe.github.io/tcp-udp/)
 
 Un site web statique responsive et interactif pour comprendre les protocoles de communication réseau TCP et UDP.
 
