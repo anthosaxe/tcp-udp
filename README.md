@@ -1,5 +1,6 @@
 # 🌐 Protocoles TCP et UDP - Site de Présentation
 
+[Le site](https://github.com/anthosaxe/tcp-udp-presentation.git)
 Un site web statique responsive et interactif pour comprendre les protocoles de communication réseau TCP et UDP.
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
@@ -71,7 +72,7 @@ Aucun prérequis particulier ! Le projet utilise uniquement du HTML, CSS et Java
 
 1. **Cloner le repository**
    ```bash
-   git clone https://github.com/votre-username/tcp-udp-presentation.git
+   git clone https://github.com/anthosaxe/tcp-udp-presentation.git
    cd tcp-udp-presentation
    ```
 
@@ -131,24 +132,6 @@ Le projet utilise Tailwind CSS version CDN pour :
 - Utilitaires de spacing et typography
 - Classes d'animation
 
-## 📸 Captures d'écran
-
-### Page d'accueil
-![Page d'accueil](https://via.placeholder.com/800x400/4F46E5/FFFFFF?text=Page+d'accueil)
-
-### Page TCP
-![Page TCP](https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=Page+TCP)
-
-### Page UDP
-![Page UDP](https://via.placeholder.com/800x400/10B981/FFFFFF?text=Page+UDP)
-
-### Page Comparaison
-![Page Comparaison](https://via.placeholder.com/800x400/8B5CF6/FFFFFF?text=Comparaison)
-
-## 🎓 Contenu pédagogique
-
-### Ce que vous apprendrez
-
 **Sur TCP :**
 - Fonctionnement du Three-Way Handshake
 - Mécanismes de fiabilité et d'ordre
@@ -165,49 +148,3 @@ Le projet utilise Tailwind CSS version CDN pour :
 - Tableau comparatif détaillé
 - Arbre de décision pour choisir le bon protocole
 - Exemples concrets d'applications
-
-## 🤝 Contribuer
-
-Les contributions sont les bienvenues ! Voici comment vous pouvez aider :
-
-1. **Fork** le projet
-2. Créez une **branche** pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
-3. **Commit** vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une **Pull Request**
-
-### Idées de contributions
-- 🎨 Améliorer le design
-- 📝 Ajouter du contenu technique
-- 🌍 Traduire en d'autres langues
-- 🐛 Corriger des bugs
-- ✨ Ajouter des animations
-
-## 📝 Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
-## 👤 Auteur
-
-**[Votre Nom]**
-
-- GitHub: [@votre-username](https://github.com/votre-username)
-- LinkedIn: [Votre Profil](https://linkedin.com/in/votre-profil)
-
-## 🙏 Remerciements
-
-- Tailwind CSS pour le framework CSS
-- La communauté open source
-- Les RFCs 793 (TCP) et 768 (UDP)
-
-## 📚 Ressources additionnelles
-
-- [RFC 793 - Transmission Control Protocol](https://tools.ietf.org/html/rfc793)
-- [RFC 768 - User Datagram Protocol](https://tools.ietf.org/html/rfc768)
-- [Documentation Tailwind CSS](https://tailwindcss.com/docs)
-- [MDN Web Docs - Networking](https://developer.mozilla.org/en-US/docs/Web/HTTP)
-
----
-
-⭐ **Si ce projet vous a aidé, n'oubliez pas de lui donner une étoile !** ⭐
-
