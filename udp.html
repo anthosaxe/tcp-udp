@@ -80,10 +80,10 @@
             </h3>
             <div class="prose max-w-none">
                 <p class="text-lg text-gray-700 mb-4 leading-relaxed">
-                    UDP (User Datagram Protocol) est un protocole de transport sans connexion qui privilégie la vitesse et l'efficacité au détriment de la fiabilité. Contrairement à TCP, UDP adopte une approche "fire and forget" (envoyer et oublier) : les données sont envoyées sans établissement de connexion préalable et sans garantie de livraison.
+                    UDP privilégie la <strong>rapidité</strong> sur la fiabilité - "Fire and Forget"!
                 </p>
                 <p class="text-lg text-gray-700 mb-4 leading-relaxed">
-                    Développé en 1980 par David P. Reed, UDP est conçu pour les applications où la rapidité prime sur la fiabilité absolue. Il est particulièrement adapté aux transmissions en temps réel où une donnée ancienne devient inutile et où il vaut mieux recevoir les nouvelles données rapidement plutôt que d'attendre la retransmission d'anciennes données perdues.
+                    Sans connexion • 8 octets seulement • Parfait pour le temps réel
                 </p>
                 <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500 my-6">
                     <h4 class="text-xl font-bold text-green-800 mb-3">Point Clé</h4>
@@ -115,7 +115,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">Rapidité</h4>
                     <p class="text-gray-700">
-                        UDP est significativement plus rapide que TCP car il élimine l'overhead de l'établissement de connexion (pas de three-way handshake), des accusés de réception et des retransmissions. Les datagrammes sont envoyés immédiatement, réduisant drastiquement la latence, ce qui est crucial pour les applications sensibles au temps.
+                        Envoi immédiat sans négociation - latence minimale.
                     </p>
                     
                 </div>
@@ -132,7 +132,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">Sans Connexion</h4>
                     <p class="text-gray-700">
-                        UDP fonctionne en mode connectionless : aucune connexion n'est établie avant l'envoi des données. Chaque datagramme est indépendant et traité séparément. Il n'y a pas de maintien d'état de connexion, ce qui simplifie considérablement le protocole et réduit l'utilisation des ressources.
+                        Mode connectionless : chaque datagramme est indépendant.
                     </p>
                     
                 </div>
@@ -149,7 +149,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">En-tête Léger</h4>
                     <p class="text-gray-700">
-                        L'en-tête UDP ne fait que 8 octets (contre 20 minimum pour TCP), contenant uniquement : port source (2 octets), port destination (2 octets), longueur (2 octets) et checksum (2 octets). Cette simplicité maximise l'efficacité de la bande passante en minimisant les données de contrôle.
+                        En-tête ultra-léger : seulement 8 octets.
                     </p>
                     
                 </div>
@@ -166,7 +166,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">Pas de Garantie</h4>
                     <p class="text-gray-700">
-                        UDP n'offre aucune garantie : les datagrammes peuvent être perdus, dupliqués, corrompus ou arriver dans le désordre. C'est un service "best effort" (au mieux) où la responsabilité de gérer ces problèmes incombe à l'application si nécessaire. Cette simplicité permet une transmission ultra-rapide.
+                        Best effort : aucune garantie de livraison ou d'ordre.
                     </p>
                     
                 </div>
@@ -183,7 +183,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">Support Multicast</h4>
                     <p class="text-gray-700">
-                        UDP supporte nativement le broadcast (diffusion à tous) et le multicast (diffusion à un groupe). Un seul datagramme peut atteindre plusieurs destinataires simultanément, ce qui est impossible avec TCP. Cette capacité est essentielle pour la diffusion vidéo, les jeux multijoueurs et la découverte de services réseau.
+                        Broadcast et multicast natifs vers plusieurs destinataires.
                     </p>
                     
                 </div>
@@ -200,7 +200,7 @@
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-3">Pas de Contrôle</h4>
                     <p class="text-gray-700">
-                        UDP ne dispose d'aucun mécanisme de contrôle de flux ni de congestion. Il envoie les données au rythme de l'application sans se soucier de la capacité du réseau ou du destinataire. Cette absence de régulation permet une transmission immédiate mais nécessite que l'application gère elle-même ces aspects si besoin.
+                        Aucun contrôle : envoi au rythme de l'application.
                     </p>
                     
                 </div>
@@ -217,34 +217,34 @@
             
             <div class="bg-white rounded-xl p-8 text-gray-800">
                 <p class="text-lg mb-6 text-gray-700">
-                    L'en-tête UDP est remarquablement compact avec seulement 8 octets, contre 20 octets minimum pour TCP. Cette simplicité se traduit par un traitement plus rapide et moins de données de contrôle à transmettre sur le réseau.
+                    En-tête UDP : seulement 8 octets (vs 20+ pour TCP).
                 </p>
                 
                 <div class="space-y-4">
                     <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                         <h4 class="font-bold text-lg mb-2">Port Source (16 bits)</h4>
-                        <p class="text-gray-700">Identifie le port de l'application émettrice. Ce champ est optionnel et peut être mis à zéro si aucune réponse n'est attendue.</p>
+                        <p class="text-gray-700">Port émetteur (optionnel si pas de réponse).</p>
                     </div>
 
                     <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                         <h4 class="font-bold text-lg mb-2">Port Destination (16 bits)</h4>
-                        <p class="text-gray-700">Spécifie le port de l'application destinataire. Ce champ est obligatoire et permet de router le datagramme vers la bonne application sur l'hôte de destination.</p>
+                        <p class="text-gray-700">Port destinataire (obligatoire).</p>
                     </div>
 
                     <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                         <h4 class="font-bold text-lg mb-2">Longueur (16 bits)</h4>
-                        <p class="text-gray-700">Indique la longueur totale du datagramme UDP (en-tête + données) en octets. La longueur minimale est de 8 octets (en-tête seul) et la maximale théorique est de 65 535 octets.</p>
+                        <p class="text-gray-700">Taille totale du datagramme.</p>
                     </div>
 
                     <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                         <h4 class="font-bold text-lg mb-2">Checksum (16 bits)</h4>
-                        <p class="text-gray-700">Permet une vérification d'intégrité basique des données. Ce champ est optionnel en IPv4 mais obligatoire en IPv6. Contrairement à TCP, UDP ne retransmet pas les datagrammes corrompus.</p>
+                        <p class="text-gray-700">Vérification d'intégrité (optionnel IPv4).</p>
                     </div>
                 </div>
 
                 <div class="mt-6 bg-green-100 p-4 rounded-lg">
                     <p class="text-gray-800">
-                        <strong>Note :</strong> La simplicité de l'en-tête UDP se traduit par un temps de traitement minimal côté système d'exploitation, permettant des débits plus élevés et une latence réduite par rapport à TCP.
+                        <strong>Note :</strong> Traitement ultra-rapide grâce à la simplicité.
                     </p>
                 </div>
             </div>
@@ -264,7 +264,7 @@
                         📺 Streaming Vidéo et Audio (VoIP, Visioconférence)
                     </h4>
                     <p class="text-gray-700">
-                        Le streaming en direct privilégie la continuité sur la perfection. UDP permet d'afficher les nouvelles images immédiatement sans attendre la retransmission d'images perdues qui seraient de toute façon obsolètes. Une brève pixellisation est préférable à un gel de l'image.
+                        Streaming : continuité plutôt que perfection.
                     </p>
                 </div>
 
@@ -273,7 +273,7 @@
                         🎮 Jeux en Ligne Multijoueurs
                     </h4>
                     <p class="text-gray-700">
-                        Dans les jeux d'action, la position actuelle d'un joueur prime sur sa position d'il y a 100ms. UDP transmet les mises à jour de position instantanément. Si un paquet est perdu, le suivant le remplace, rendant la retransmission inutile et même contre-productive.
+                        Gaming : position actuelle > position passée.
                     </p>
                 </div>
 
@@ -282,7 +282,7 @@
                         🌐 DNS (Domain Name System)
                     </h4>
                     <p class="text-gray-700">
-                        Les requêtes DNS sont courtes et simples, généralement résolues en un seul aller-retour. UDP est parfait pour ce cas : pas de connexion à établir, envoi immédiat. Si la réponse n'arrive pas, l'application peut simplement renvoyer la requête.
+                        DNS : requêtes rapides en un aller-retour.
                     </p>
                 </div>
 
@@ -291,7 +291,7 @@
                         🔄 DHCP (Dynamic Host Configuration Protocol)
                     </h4>
                     <p class="text-gray-700">
-                        DHCP utilise UDP car il doit fonctionner avant même qu'une adresse IP ne soit attribuée. Le broadcast UDP permet de découvrir les serveurs DHCP sans connexion préalable. Le protocole lui-même gère les retransmissions si nécessaire.
+                        DHCP : fonctionne avant attribution d'IP.
                     </p>
                 </div>
 
@@ -300,7 +300,7 @@
                         📡 Diffusion en Direct et IPTV
                     </h4>
                     <p class="text-gray-700">
-                        La télévision par IP diffuse vers des milliers de spectateurs simultanément via multicast UDP. Un seul flux réseau atteint tous les abonnés. TCP serait impossible à utiliser car il nécessiterait une connexion individuelle avec chaque spectateur.
+                        IPTV : multicast vers des milliers de viewers.
                     </p>
                 </div>
 
@@ -309,7 +309,7 @@
                         📊 IoT et Capteurs
                     </h4>
                     <p class="text-gray-700">
-                        Les capteurs IoT envoient périodiquement des mesures (température, humidité). Perdre une mesure n'est pas grave car une nouvelle arrivera bientôt. UDP minimise la consommation d'énergie et de bande passante, crucial pour les appareils à batterie.
+                        IoT : économie d'énergie pour capteurs.
                     </p>
                 </div>
             </div>
@@ -403,7 +403,7 @@
     <footer class="bg-gray-800 text-white py-8 mt-8">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg mb-2">Présentation sur les Protocoles de Communication Réseau</p>
-            <p class="text-gray-400 mb-4">[Votre nom] - [Date]</p>
+            <p class="text-gray-400 mb-4">D'haene Anthony - Janvier 2026</p>
             <div class="flex justify-center space-x-6">
                 <a href="index.html" class="hover:text-indigo-400 transition">Accueil</a>
                 <a href="tcp.html" class="hover:text-blue-400 transition">TCP</a>
