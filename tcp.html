@@ -90,6 +90,76 @@
             transform: scale(1.1);
             background: #f3f4f6;
         }
+        
+        /* Carrousel Styles */
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .carousel-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
+            z-index: 1002;
+        }
+        
+        .carousel-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .carousel-prev {
+            left: 2rem;
+        }
+        
+        .carousel-next {
+            right: 2rem;
+        }
+        
+        .carousel-indicators {
+            position: fixed;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1002;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: white;
+            transform: scale(1.5);
+        }
+        
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
@@ -462,7 +532,30 @@
     <div id="imageModal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
-            <img id="modalImage" class="modal-image" src="" alt="Schéma explicatif">
+            
+            <!-- Conteneur du carrousel -->
+            <div class="carousel-container">
+                <img id="modalImage" class="modal-image" src="" alt="Schéma explicatif">
+                
+                <!-- Boutons de navigation -->
+                <button id="prevBtn" class="carousel-btn carousel-prev" onclick="changeImage(-1)">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button id="nextBtn" class="carousel-btn carousel-next" onclick="changeImage(1)">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                
+                <!-- Indicateurs de niveau -->
+                <div class="carousel-indicators">
+                    <span class="indicator" data-index="0"></span>
+                    <span class="indicator" data-index="1"></span>
+                    <span class="indicator" data-index="2"></span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -470,7 +563,7 @@
     <footer class="bg-gray-800 text-white py-8 mt-8">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg mb-2">Présentation sur les Protocoles de Communication Réseau</p>
-            <p class="text-gray-400 mb-4">D'haene Anthony - Janvier 2026</p>
+            <p class="text-gray-400 mb-4">[Votre nom] - [Date]</p>
             <div class="flex justify-center space-x-6">
                 <a href="index.html" class="hover:text-indigo-400 transition">Accueil</a>
                 <a href="tcp.html" class="hover:text-blue-400 transition">TCP</a>
@@ -508,25 +601,109 @@
             observer.observe(section);
         });
 
-        // Modal functionality
+        // Modal functionality avec carrousel
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
+        let currentImages = [];
+        let currentIndex = 0;
+
+        // Définir les images pour chaque carte
+        const imageGroups = {
+            'connexion': ['média/TCP-Three-Way-Handshake.png'],
+            'erreurs': [
+                'média/TCP-Segmentation-Niveau1.png',
+                'média/TCP-Segmentation-Niveau2.png',
+                'média/TCP-Segmentation-Niveau3.png'
+            ]
+        };
 
         // Ajouter un listener sur toutes les cartes avec data-modal
         document.querySelectorAll('[data-modal]').forEach(card => {
             card.addEventListener('click', function() {
-                const imageUrl = this.getAttribute('data-image');
+                const modalType = this.getAttribute('data-modal');
+                currentImages = imageGroups[modalType] || [this.getAttribute('data-image')];
+                currentIndex = 0;
                 
-                modalImage.src = imageUrl;
+                showImage(currentIndex);
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Bloquer le scroll
+                document.body.style.overflow = 'hidden';
+                
+                updateCarouselUI();
             });
+        });
+
+        function showImage(index) {
+            if (currentImages.length > 0) {
+                modalImage.src = currentImages[index];
+            }
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            // Boucler le carrousel
+            if (currentIndex < 0) {
+                currentIndex = currentImages.length - 1;
+            } else if (currentIndex >= currentImages.length) {
+                currentIndex = 0;
+            }
+            
+            showImage(currentIndex);
+            updateCarouselUI();
+        }
+
+        function updateCarouselUI() {
+            // Afficher/masquer les boutons selon le nombre d'images
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const indicators = document.querySelectorAll('.indicator');
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+            
+            if (currentImages.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                indicatorsContainer.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+                indicatorsContainer.style.display = 'flex';
+                
+                // Mettre à jour les indicateurs
+                indicators.forEach((indicator, index) => {
+                    if (index < currentImages.length) {
+                        indicator.style.display = 'block';
+                        indicator.classList.toggle('active', index === currentIndex);
+                    } else {
+                        indicator.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Clic sur les indicateurs
+        document.querySelectorAll('.indicator').forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                showImage(currentIndex);
+                updateCarouselUI();
+            });
+        });
+
+        // Navigation avec les flèches du clavier
+        document.addEventListener('keydown', function(e) {
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                }
+            }
         });
 
         // Fonction pour fermer le modal
         function closeModal() {
             modal.classList.remove('active');
-            document.body.style.overflow = ''; // Réactiver le scroll
+            document.body.style.overflow = '';
         }
 
         // Fermer en cliquant sur le fond
