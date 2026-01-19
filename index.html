@@ -107,7 +107,7 @@
 
                 <h4 class="text-2xl font-bold text-gray-800 mb-6 mt-10">🎯 Rôles Communs à Tous les Protocoles de Transport</h4>
                 
-                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-500 cursor-pointer hover:shadow-lg transition" data-modal="segmentation">
                         <div class="flex items-center mb-3">
                             <svg class="w-8 h-8 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,22 +129,11 @@
                         <p class="text-gray-700">Direction via ports vers les applications</p>
                         <p class="text-purple-600 text-sm mt-2 font-semibold">👁️ Voir le schéma →</p>
                     </div>
-
-                    <div class="bg-orange-50 p-6 rounded-xl border-l-4 border-orange-500 cursor-pointer hover:shadow-lg transition" data-modal="controle">
-                        <div class="flex items-center mb-3">
-                            <svg class="w-8 h-8 text-orange-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                            <h5 class="text-xl font-bold text-gray-800">Contrôle de Flux</h5>
-                        </div>
-                        <p class="text-gray-700">Régulation du débit d'envoi (TCP)</p>
-                        <p class="text-orange-600 text-sm mt-2 font-semibold">👁️ Voir le schéma →</p>
-                    </div>
                 </div>
 
                 <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400 mt-4">
                     <p class="text-sm text-gray-700">
-                        <strong>Note :</strong> TCP et UDP partagent ces rôles de base, mais TCP ajoute des garanties supplémentaires (fiabilité, ordre, contrôle de congestion) qu'UDP ne possède pas.
+                        <strong>Note :</strong> Ces 2 rôles sont partagés par TCP et UDP. Le contrôle de flux et la fiabilité sont des caractéristiques spécifiques à TCP uniquement.
                     </p>
                 </div>
             </div>
@@ -274,8 +263,7 @@
         const imageMap = {
             'osi': 'média/Modele-OSI-TCPIP.png',
             'segmentation': 'média/Role-Segmentation.png',
-            'multiplexage': 'média/Role-Multiplexage.png',
-            'controle': 'média/Role-Controle-Flux.png'
+            'multiplexage': 'média/Role-Multiplexage.png'
         };
 
         // Ouvrir le modal
